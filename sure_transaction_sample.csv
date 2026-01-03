@@ -1,0 +1,4 @@
+      date*,amount*,name,currency,category,tags,account,notes
+      05/15/2024,-45.99,Grocery Store,USD,Food,groceries|essentials,Checking Account,Monthly grocery run
+      05/16/2024,1500.00,Salary,,Income,,Main Account,
+      05/17/2024,-12.50,Coffee Shop,,,coffee,,
