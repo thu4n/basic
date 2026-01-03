@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/csv"
+	"flag"
 	"fmt"
 	"os"
 	"strings"
@@ -11,7 +12,17 @@ import (
 )
 
 func main() {
-	f, err := excelize.OpenFile("tpb_test_transactions.xlsx")
+	// Define CLI flags
+	inputFile := flag.String("input", "tpb_test_transactions.xlsx", "Input Excel file path")
+	outputFile := flag.String("output", "output.csv", "Output CSV file path")
+	flag.Parse()
+
+	fmt.Println("BASIC - Bank Account Statement Into CSV")
+	fmt.Println("========================================")
+	fmt.Printf("Input:  %s\n", *inputFile)
+	fmt.Printf("Output: %s\n", *outputFile)
+
+	f, err := excelize.OpenFile(*inputFile)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -30,7 +41,7 @@ func main() {
 		return
 	}
 
-	csvFile, err := os.Create("output.csv")
+	csvFile, err := os.Create(*outputFile)
 	if err != nil {
 		fmt.Println("Error creating CSV file:", err)
 		return
@@ -115,5 +126,5 @@ func main() {
 		}
 	}
 
-	fmt.Println("Successfully wrote data to output.csv")
+	fmt.Printf("\nSuccessfully wrote data to %s\n", *outputFile)
 }

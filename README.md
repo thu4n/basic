@@ -9,14 +9,54 @@ A simple Go utility to convert TPBank account statements (Excel format) into a s
 - Converts debit/credit columns into signed amounts (negative for debits, positive for credits)
 - Outputs a clean CSV file ready for import into Sure
 
+## Installation
+
+Install the tool to your Go bin directory so you can run `basic` from anywhere:
+
+```bash
+go install
+```
+
+This installs the binary to `~/go/bin/basic`. Now you can use it globally:
+
+```bash
+basic -input myfile.xlsx -output result.csv
+```
+
 ## Usage
+
+
+### Get Help
+
+```bash
+basic -h
+```
+
+### Custom Input/Output Files
+
+```bash
+basic -input mystatement.xlsx -output transactions.csv
+```
+
+### Running from Source
+
+If you haven't installed it yet, you can run directly:
 
 ```bash
 go run main.go
+
+# Or with custom files
+go run main.go -input mystatement.xlsx -output transactions.csv
 ```
 
+### CLI Flags
+
+- `-input`: Path to the input Excel file (default: `tpb_test_transactions.xlsx`)
+- `-output`: Path to the output CSV file (default: `output.csv`)
+- `-h`: Show help
+
 The program will:
-1. Read `tpb_test_transactions.xlsx`
+1. Read `tpb_test_transactions.xlsx
 2. Process transactions starting from row 9 (skipping headers)
 3. Generate `output.csv` in the current directory
 
