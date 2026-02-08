@@ -108,16 +108,19 @@ func main() {
 		}
 
 		description := row[2] // Mô tả giao dịch
+		correspondentAccount := row[6]
+		accountName := row[7]
+		notes := fmt.Sprintf("%s | TKDU: %s | TTK: %s", description, correspondentAccount, accountName)
 
 		outputRow := []string{
 			formattedDate, // date*
 			amount,        // amount*
-			"",            // name (empty)
+			description,   // name
 			"VND",         // currency
 			"",            // category (empty)
 			"",            // tags (empty)
 			"TP Bank ATM", // account
-			description,   // notes
+			notes,         // notes
 		}
 
 		if err := writer.Write(outputRow); err != nil {
