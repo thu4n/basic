@@ -2,6 +2,10 @@
 
 A simple Go utility to convert TPBank account statements (Excel format) into a standardized CSV format compatible with **Sure** - a personal finance tracking application.
 
+Supported formats:
+- `tpbank-atm` — TPBank ATM/debit account statement
+- `tpbank-visa` — TPBank Visa credit card statement
+
 ## What it does
 
 - Reads TPBank account statement data from Excel files (`.xlsx`)
@@ -11,7 +15,13 @@ A simple Go utility to convert TPBank account statements (Excel format) into a s
 
 ## Installation
 
-Install the tool to your Go bin directory so you can run `basic` from anywhere:
+Build the binary:
+
+```bash
+go build -o basic .
+```
+
+Or install it to your Go bin directory so you can run `basic` from anywhere:
 
 ```bash
 go install
@@ -20,7 +30,7 @@ go install
 This installs the binary to `~/go/bin/basic`. Now you can use it globally:
 
 ```bash
-basic -input myfile.xlsx -output result.csv
+basic tpbank-atm -i myfile.xlsx -o result.csv
 ```
 
 ## Usage
@@ -29,13 +39,27 @@ basic -input myfile.xlsx -output result.csv
 ### Get Help
 
 ```bash
-basic -h
+# List all subcommands
+basic --help
+
+# Help for a specific subcommand
+basic tpbank-atm --help
+basic tpbank-visa --help
 ```
 
-### Custom Input/Output Files
+### TPBank ATM / Debit
 
 ```bash
-basic -input mystatement.xlsx -output transactions.csv
+basic tpbank-atm -i mystatement.xlsx -o transactions.csv
+```
+
+### TPBank Visa Credit Card
+
+```bash
+basic tpbank-visa -i visa_statement.xlsx -o transactions.csv
+
+# If the sheet name or data start row differs from the defaults:
+basic tpbank-visa -i visa_statement.xlsx -o transactions.csv -s "Sheet1" -r 2
 ```
 
 ### Running from Source
@@ -43,17 +67,25 @@ basic -input mystatement.xlsx -output transactions.csv
 If you haven't installed it yet, you can run directly:
 
 ```bash
-go run main.go
-
-# Or with custom files
-go run main.go -input mystatement.xlsx -output transactions.csv
+go run . tpbank-atm -i mystatement.xlsx -o transactions.csv
 ```
 
 ### CLI Flags
 
-- `-input`: Path to the input Excel file (default: `tpb_test_transactions.xlsx`)
-- `-output`: Path to the output CSV file (default: `output.csv`)
-- `-h`: Show help
+All subcommands share these flags:
+
+| Flag | Short | Description | Default |
+|------|-------|-------------|---------|
+| `--input` | `-i` | Path to the input Excel file | subcommand-specific |
+| `--output` | `-o` | Path to the output CSV file | `output.csv` |
+| `--help` | `-h` | Show help | |
+
+`tpbank-visa` also supports:
+
+| Flag | Short | Description | Default |
+|------|-------|-------------|---------|
+| `--sheet` | `-s` | Sheet name to read from | `Sheet1` |
+| `--data-row` | `-r` | Row number where data starts (1-indexed) | `2` |
 
 The program will:
 1. Read `tpb_test_transactions.xlsx
@@ -83,4 +115,5 @@ date*,amount*,name,currency,category,tags,account,notes
 
 ```bash
 go get github.com/xuri/excelize/v2
+go get github.com/spf13/cobra
 ```

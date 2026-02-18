@@ -28,8 +28,8 @@ vendor/
 .DS_Store
 
 # Output files (generated data)
-output.csv
-*_output.csv
+outputs/
+excel_exports/
 
 # Keep test and sample files for reference
 !sure_transaction_sample.csv
