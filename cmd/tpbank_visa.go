@@ -14,8 +14,9 @@ import (
 var tpbankVisaCmd = &cobra.Command{
 	Use:   "tpbank-visa",
 	Short: "Convert TPBank Visa credit card statement",
-	Long: `Convert a TPBank Visa credit card Excel statement (.xlsx)
-into a CSV file compatible with the Sure transaction import format.`,
+	Long: `Convert a TPBank Visa credit card Excel statement (.xlsx) into a CSV file compatible with the Sure transaction import format.
+The Excel file is expected to have data starting at row 9 on the "VN" sheet,
+with columns in the standard TPBank ATM export format.`,
 	RunE: runTPBankVisa,
 }
 
