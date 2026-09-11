@@ -5,13 +5,14 @@ A simple Go utility to convert TPBank account statements (Excel format) into a s
 Supported formats:
 - `tpbank-atm` — TPBank ATM/debit account statement
 - `tpbank-visa` — TPBank Visa credit card statement
+- `dnse` — DNSE stock trade statement (Excel `.xlsx` or TSV/CSV)
 
 ## What it does
 
-- Reads TPBank account statement data from Excel files (`.xlsx`)
-- Parses transaction dates, amounts, and descriptions
-- Converts debit/credit columns into signed amounts (negative for debits, positive for credits)
-- Outputs a clean CSV file ready for import into Sure
+- Reads TPBank account statement data and DNSE stock trade statements from Excel files (`.xlsx`) or text/CSV files
+- Converts bank debit/credit statements into Sure transaction import format (`date*,amount*,name,currency,category,tags,account,notes`)
+- Converts DNSE stock trade statements into Sure trade import standard (`date*,ticker*,exchange_operating_mic,currency,qty*,price*,account,name`)
+- Automatically filters out cancelled or unexecuted trade orders
 
 ## Installation
 
@@ -53,13 +54,13 @@ basic tpbank-visa --help
 basic tpbank-atm -i mystatement.xlsx -o transactions.csv
 ```
 
-### TPBank Visa Credit Card
-
+### DNSE Stock Trade Statement
 ```bash
-basic tpbank-visa -i visa_statement.xlsx -o transactions.csv
+# Convert DNSE Excel file (.xlsx) or TSV statement
+basic dnse -i DNSE.xlsx -o trade_output.csv
 
-# If the sheet name or data start row differs from the defaults:
-basic tpbank-visa -i visa_statement.xlsx -o transactions.csv -s "Sheet1" -r 2
+# Optional flags:
+basic dnse -i dnse_sample.txt -o trade_output.csv --account "DNSE Trading Account" --mic "XSTC" --currency "VND"
 ```
 
 ### Running from Source

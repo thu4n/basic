@@ -1,0 +1,6 @@
+STT	Thời gian đặt	 Ngày giao dịch	Lệnh	Mã	Số tiểu khoản	Tỷ lệ tiền mặt	Chi tiết giao dịch					Tỷ lệ phí	Phí		Thuế	Trạng thái	Kênh
+							KL đặt	KL khớp	Giá đặt	Giá khớp	Giá trị khớp		Phí trả Sở	Phí DNSE			
+1	10:15:30 15/05/2024	15/05/2024	Mua	AAPL	0001234567-1	100%	10	10	150.00	150.00	1500.00		1.5	0	0	Khớp hết	Web
+2	11:20:00 16/05/2024	16/05/2024	Bán	GOOGL	0001234567-1	100%	5	5	2500.00	2500.00	12500.00		12.5	0	0	Khớp hết	Web
+3	09:05:12 17/05/2024	17/05/2024	Mua	TSLA	0001234567-1	100%	2	2	700.50	700.50	1401.00		1.4	0	0	Khớp hết	Web
+4	14:00:00 18/05/2024	18/05/2024	Mua	HPG	0001234567-1	100%	1000	1000	25500	25500	25500000		25500	0	0	Khớp hết	Web

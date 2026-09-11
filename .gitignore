@@ -29,7 +29,7 @@ vendor/
 
 # Output files (generated data)
 outputs/
-excel_exports/
+input/
 
 # Keep test and sample files for reference
 !sure_transaction_sample.csv
